@@ -8,15 +8,60 @@ marp: true
 
 ---
 
+## :world_map: Apache Atlas
+
+---
+
 <!-- _footer: "Azure Purview High-Level Concepts" -->
 
 ![bg width:95%](../image/purviewapi.png)
 
+---
+
+<!-- _footer: "https://atlas.apache.org/" -->
+
+### :world_map: Apache Atlas
+
+> *"Apache Atlas provides open metadata management and governance capabilities for organizations to build a catalog of their data assets, classify and govern these assets and provide collaboration capabilities around these data assets for data scientists, analysts and the data governance team."*
+
+---
+<!-- _footer: "https://atlas.apache.org/" -->
+
+### :clock1: Apache Atlas Milestones
+
+* 2015-01-28 [Hortonworks Establishes Data Governance Initiative](https://www.prnewswire.com/news-releases/hortonworks-establishes-data-governance-initiative-300026958.html)
+* 2015-05-06 [Apache Atlas submitted to the Apache Software Foundation](https://incubator.apache.org/projects/atlas.html)
+* 2017-06-21 [Apache Atlas graduates to a Top-Level Project](https://incubator.apache.org/projects/atlas.html)
+* 2018-06-02 [Apache Atlas 1.0.0](https://atlas.apache.org/1.0.0/Downloads.html)
+* 2019-05-04 [Apache Atlas 2.0.0](https://atlas.apache.org/2.0.0/Downloads.html)
+* 2020-07-15 [Apache Atlas 2.1.0](https://atlas.apache.org/#/Downloads) *(Latest)*
+
+---
+
+<!-- _footer: "https://atlas.apache.org/api/v2/ui/index.html#/" -->
+
+### :computer: Apache Atlas REST API
+
+| Interface | Description |
+| :-------------: | :------------- |
+| **Types** | A definition of how a particular type of metadata object is stored and accessed. |
+| **Entity** | A specific value or instance of an Entity ‘type’. |
+| **Glossary** | A hierarchical set of business terms that represents your business domain. |
+|**Relationship** | Defines relationship between entities. |
+| **Lineage** | Returns lineage information about an entity. |
+
 <style>
-section.left h4, section.left p {
-  text-align: left;
+table {
+  font-size: 22px;
 }
 </style>
+
+---
+
+<!-- _footer: "https://atlas.apache.org/2.0.0/TypeSystem.html" -->
+
+### :book: Apache Atlas Type System
+> *"Atlas allows users to define a model for the metadata objects they want to manage. The model is composed of definitions called ‘types’. Instances of ‘types’ called ‘entities’ represent the actual metadata objects that are managed. The Type System is a component that allows users to define and manage the types and entities. All metadata objects managed by Atlas out of the box (like Hive tables, for e.g.) are modelled using types and represented as entities. To store new types of metadata in Atlas, one needs to understand the concepts of the type system component."*
 
 ---
 
