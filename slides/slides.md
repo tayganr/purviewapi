@@ -8,7 +8,7 @@ marp: true
 
 ---
 
-## :world_map: Apache Atlas
+## :helicopter: High-Level Overview
 
 ---
 
@@ -18,6 +18,9 @@ marp: true
 
 ---
 
+## :world_map: Apache Atlas
+
+---
 <!-- _footer: "https://atlas.apache.org/" -->
 
 ### :world_map: Apache Atlas
@@ -42,17 +45,12 @@ marp: true
 
 ### :computer: Apache Atlas REST API
 
-| Interface | Description |
-| :-------------: | :------------- |
-| **Types** | A definition of how a particular type of metadata object is stored and accessed. |
-| **Entity** | A specific value or instance of an Entity ‘type’. |
-| **Glossary** | A hierarchical set of business terms that represents your business domain. |
-|**Relationship** | Defines relationship between entities. |
-| **Lineage** | Returns lineage information about an entity. |
+![width:750px center](../image/apache_atlas.png)
 
 <style>
-table {
-  font-size: 22px;
+img[alt~="center"] {
+  display: block;
+  margin: 0 auto;
 }
 </style>
 
@@ -62,6 +60,62 @@ table {
 
 ### :book: Apache Atlas Type System
 > *"Atlas allows users to define a model for the metadata objects they want to manage. The model is composed of definitions called ‘types’. Instances of ‘types’ called ‘entities’ represent the actual metadata objects that are managed. The Type System is a component that allows users to define and manage the types and entities. All metadata objects managed by Atlas out of the box (like Hive tables, for e.g.) are modelled using types and represented as entities. To store new types of metadata in Atlas, one needs to understand the concepts of the type system component."*
+
+---
+
+<!-- _footer: "https://atlas.apache.org/api/v2/json_AtlasTypesDef.html" -->
+
+### :book: Apache Atlas Type Definitions
+
+![width:750px center](../image/type_definitions.png)
+
+<style>
+img[alt~="center"] {
+  display: block;
+  margin: 0 auto;
+}
+</style>
+
+---
+
+![bg fit](../image/def_enum.png)
+
+---
+
+![bg fit](../image/def_struct.png)
+
+---
+
+![bg fit](../image/def_classification.png)
+
+---
+
+![bg fit](../image/def_relationship.png)
+
+---
+
+![bg fit](../image/def_entity.png)
+
+---
+
+![bg fit](../image/def_entity_full.png)
+
+---
+
+<!-- _footer: "https://atlas.apache.org/2.0.0/TypeSystem.html" -->
+
+### :blue_book: Entities
+> *"An ‘entity’ in Atlas is a specific value or instance of an Entity ‘type’ and thus represents a specific metadata object in the real world. Referring back to our analogy of Object Oriented Programming languages, an ‘instance’ is an ‘Object’ of a certain ‘Class’."*
+
+---
+
+### :blue_book: Entity Example (azure_sql_table)
+
+```json
+{
+    "name": "Taygan"
+}
+```
 
 ---
 
