@@ -90,7 +90,10 @@ img[alt~="center"] {
 
 ---
 
-![bg fit](../image/def_relationship.png)
+<!-- _footer: "https://atlas.apache.org/2.0.0/TypeSystem.html" -->
+
+### :blue_book: Entities
+> *"An ‘entity’ in Atlas is a specific value or instance of an Entity ‘type’ and thus represents a specific metadata object in the real world. Referring back to our analogy of Object Oriented Programming languages, an ‘instance’ is an ‘Object’ of a certain ‘Class’."*
 
 ---
 
@@ -102,20 +105,22 @@ img[alt~="center"] {
 
 ---
 
-<!-- _footer: "https://atlas.apache.org/2.0.0/TypeSystem.html" -->
-
-### :blue_book: Entities
-> *"An ‘entity’ in Atlas is a specific value or instance of an Entity ‘type’ and thus represents a specific metadata object in the real world. Referring back to our analogy of Object Oriented Programming languages, an ‘instance’ is an ‘Object’ of a certain ‘Class’."*
+![bg fit](../image/entity.png)
 
 ---
 
-### :blue_book: Entity Example (azure_sql_table)
+<!-- _footer: "https://atlas.apache.org/2.0.0/TypeSystem.html" -->
 
-```json
-{
-    "name": "Taygan"
-}
-```
+### :link: Relationships
+> *"A ‘relationship’ can be established between entities (e.g. Table <---> Columns)." Relationships have 2 ends, each of which specify cardinality, an entityDef type name, and a name.*
+
+---
+
+![bg fit](../image/def_relationship.png)
+
+---
+
+![bg fit](../image/relationship.png)
 
 ---
 
