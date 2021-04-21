@@ -212,12 +212,12 @@ In order to use the service principal, we need generate a password (aka client s
 ###### Body (x-form-urlencoded)
 | Key | Value |
 | -------------: | :------------- |
-| grant_type | POST |
+| grant_type | client_credentials |
 | client_id | `YOUR_CLIENT_ID` |
 | client_secret | `YOUR_CLIENT_SECRET` |
 | resource | https://purview.azure.net |
 
-<style scoped>
+<style>
 table {
     font-size: 16px;    
 },
@@ -236,8 +236,457 @@ table td:nth-child(1) {
 
 ---
 
-### :unlock: Request an Access Token (Postman)
+### :envelope: Request an Access Token (Postman)
 
 ![width:750px center](../image/postman_access_token.png)
 
 ---
+
+### :snake: Request an Access Token (Python)
+
+```python
+# Set Variables
+AZURE_CLIENT_ID = "YOUR_CLIENT_ID"
+AZURE_TENANT_ID = "YOUR_TENANT_ID"
+AZURE_CLIENT_SECRET = "YOUR_CLIENT_SECRET"
+
+# Prepare Request
+data = {
+    'grant_type': 'client_credentials',
+    'client_id': AZURE_CLIENT_ID,
+    'client_secret': AZURE_CLIENT_SECRET,
+    'resource': 'https://purview.azure.net',
+}
+url = 'https://login.microsoftonline.com/{0}/oauth2/token'.format(AZURE_TENANT_ID)
+
+# Get Access Token
+import requests
+request = requests.post(url, data=data)
+response = request.json()
+access_token = response['access_token']
+print(access_token)
+```
+
+---
+
+## :open_book: Examples
+
+---
+
+### :gear: 1.1 Retrieve all glossaries
+
+###### Request
+| Property | Value |
+| -------------: | :------------- |
+| Method | GET |
+| Endpoint | `https://YOUR_PURVIEW_ACCOUNT.catalog.purview.azure.com/api/atlas/v2/glossary` |
+
+###### Headers
+| Key | Value |
+| -------------: | :------------- |
+| Authorization | `Bearer YOUR_ACCESS_TOKEN` |
+
+---
+
+### :snake: 1.2 Retrieve all glossaries (Python)
+
+```python
+# Set Variables
+ATLAS_ENDPOINT = "https://YOUR_PURVIEW_ACCOUNT.catalog.purview.azure.com"
+ACCESS_TOKEN = "YOUR_ACCESS_TOKEN"
+
+# Prepare Request
+url = '{0}/api/atlas/v2/glossary'.format(ATLAS_ENDPOINT)
+headers = {'Authorization': 'Bearer {0}'.format(ACCESS_TOKEN)}
+
+# Get Data
+import requests
+import json
+request = requests.get(url, headers=headers)
+response = request.json()
+print(json.dumps(response, indent=4))
+```
+
+---
+
+### :computer: 1.3 Retrieve all glossaries ([purviewcli](https://aka.ms/purviewcli))
+
+`pv glossary read`
+
+---
+
+### :gear: 2.1 Create a custom type (classification)
+
+###### Request
+| Property | Value |
+| -------------: | :------------- |
+| Method | POST |
+| Endpoint | `https://YOUR_PURVIEW_ACCOUNT.catalog.purview.azure.com/api/atlas/v2/types/typedefs` |
+
+###### Headers
+| Key | Value |
+| -------------: | :------------- |
+| Authorization | `Bearer YOUR_ACCESS_TOKEN` |
+| Content-Type | application/json |
+
+---
+
+###### Body (Example Payload)
+
+```json
+{
+    "classificationDefs": [
+        {
+            "category": "CLASSIFICATION",
+            "description": "This is a custom classification.",
+            "name": "TAYGAN.CUSTOM.CLASSIFICATION"
+        }
+    ]
+}
+```
+
+---
+
+### :snake: 2.2 Create a custom classification (Python)
+
+```python
+# Set Variables
+ATLAS_ENDPOINT = "https://YOUR_PURVIEW_ACCOUNT.catalog.purview.azure.com"
+ACCESS_TOKEN = "YOUR_ACCESS_TOKEN"
+
+# Prepare Request
+url = '{0}/api/atlas/v2/types/typedefs'.format(ATLAS_ENDPOINT)
+headers = {
+    'Authorization': 'Bearer {0}'.format(ACCESS_TOKEN),
+    'Content-Type': 'application/json'
+}
+data = {
+    "classificationDefs": [{
+        "category": "CLASSIFICATION",
+        "description": "This is a custom classification.",
+        "name": "TAYGAN.CUSTOM.CLASSIFICATION"
+    }]
+}
+
+# Create Type
+request = requests.post(url, headers=headers, json=data)
+response = request.json()
+print(json.dumps(response, indent=4))
+```
+
+---
+
+### :gear: 3.1 Delete a custom type (classification)
+
+###### Request
+| Property | Value |
+| -------------: | :------------- |
+| Method | DELETE |
+| Endpoint | `https://YOUR_PURVIEW_ACCOUNT.catalog.purview.azure.com/api/atlas/v2/types/typedef/name/{name}` |
+
+###### Headers
+| Key | Value |
+| -------------: | :------------- |
+| Authorization | `Bearer YOUR_ACCESS_TOKEN` |
+
+---
+
+### :snake: 3.2 Delete a custom classification (Python)
+
+```python
+# Set Variables
+ATLAS_ENDPOINT = "https://YOUR_PURVIEW_ACCOUNT.catalog.purview.azure.com"
+ACCESS_TOKEN = "YOUR_ACCESS_TOKEN"
+
+# Prepare Request
+classification_name = 'TAYGAN.CUSTOM.CLASSIFICATION'
+url = '{0}/api/atlas/v2/types/typedef/name/{1}'.format(ATLAS_ENDPOINT, classification_name)
+headers = {'Authorization': 'Bearer {0}'.format(ACCESS_TOKEN)}
+
+# Delete Type
+request = requests.delete(url, headers=headers)
+print(request.status_code)
+```
+
+---
+
+### :gear: 4.1 Get an entity
+
+###### Request
+| Property | Value |
+| -------------: | :------------- |
+| Method | GET |
+| Endpoint | `https://YOUR_PURVIEW_ACCOUNT.catalog.purview.azure.com/api/atlas/v2/entity/guid/{guid}` |
+
+###### Headers
+| Key | Value |
+| -------------: | :------------- |
+| Authorization | `Bearer YOUR_ACCESS_TOKEN` |
+
+---
+
+### :snake: 4.2 Get an entity (Python)
+
+```python
+# Set Variables
+ATLAS_ENDPOINT = "https://YOUR_PURVIEW_ACCOUNT.catalog.purview.azure.com"
+ACCESS_TOKEN = "YOUR_ACCESS_TOKEN"
+
+# Prepare Request
+guid = 'f0a9c131-8cad-4fa9-928d-f4f6f6f60000'
+url = '{0}/api/atlas/v2/entity/guid/{1}'.format(ATLAS_ENDPOINT, guid)
+headers = {'Authorization': 'Bearer {0}'.format(ACCESS_TOKEN)}
+
+# Get Entity
+request = requests.get(url, headers=headers)
+response = request.json()
+print(json.dumps(response, indent=4))
+```
+
+---
+
+### :gear: 5.1 Create an entity
+
+###### Request
+| Property | Value |
+| -------------: | :------------- |
+| Method | POST |
+| Endpoint | `https://YOUR_PURVIEW_ACCOUNT.catalog.purview.azure.com/api/atlas/v2/entity` |
+
+###### Headers
+| Key | Value |
+| -------------: | :------------- |
+| Authorization | `Bearer YOUR_ACCESS_TOKEN` |
+| Content-Type | application/json |
+
+---
+
+###### Body (Example Payload)
+
+```json
+{
+    "entity": {
+        "typeName": "azure_sql_table",
+        "attributes": {
+            "qualifiedName": "mssql://sqlsvr8951.database.windows.net/sqldb8951/SalesLT/CustomEntity",
+            "name": "CustomEntity",
+            "description": "This is a custom entity."
+        }
+    }
+}
+```
+
+---
+
+### :snake: 5.2 Create an entity (Python)
+
+```python
+# Set Variables
+ATLAS_ENDPOINT = "https://YOUR_PURVIEW_ACCOUNT.catalog.purview.azure.com"
+ACCESS_TOKEN = "YOUR_ACCESS_TOKEN"
+
+# Prepare Request
+url = '{0}/api/atlas/v2/entity'.format(ATLAS_ENDPOINT)
+headers = {
+    'Authorization': 'Bearer {0}'.format(ACCESS_TOKEN),
+    'Content-Type': 'application/json'
+}
+data = {
+    "entity": {
+        "typeName": "azure_sql_table",
+        "attributes": {
+            "qualifiedName": "mssql://sqlsvr8951.database.windows.net/sqldb8951/SalesLT/CustomEntity",
+            "name": "CustomEntity",
+            "description": "This is a custom entity."
+        }
+    }
+}
+
+# Create Type
+request = requests.post(url, headers=headers, json=data)
+response = request.json()
+print(json.dumps(response, indent=4))
+```
+
+---
+
+### :gear: 6.1 Delete an entity
+
+###### Request
+| Property | Value |
+| -------------: | :------------- |
+| Method | DELETE |
+| Endpoint | `https://YOUR_PURVIEW_ACCOUNT.catalog.purview.azure.com/api/atlas/v2/entity/guid/{guid}` |
+
+###### Headers
+| Key | Value |
+| -------------: | :------------- |
+| Authorization | `Bearer YOUR_ACCESS_TOKEN` |
+
+---
+
+### :snake: 6.2 Delete an entity (Python)
+
+```python
+# Set Variables
+ATLAS_ENDPOINT = "https://YOUR_PURVIEW_ACCOUNT.catalog.purview.azure.com"
+ACCESS_TOKEN = "YOUR_ACCESS_TOKEN"
+
+# Prepare Request
+guid = 'e7714771-86c6-4083-84be-3df6f6f60000'
+url = '{0}/api/atlas/v2/entity/guid/{1}'.format(ATLAS_ENDPOINT, guid)
+headers = {'Authorization': 'Bearer {0}'.format(ACCESS_TOKEN)}
+
+# Delete Type
+request = requests.delete(url, headers=headers)
+print(request.status_code)
+```
+
+---
+
+### :gear: 7.1 Get a relationship
+
+###### Request
+| Property | Value |
+| -------------: | :------------- |
+| Method | GET |
+| Endpoint | `https://YOUR_PURVIEW_ACCOUNT.catalog.purview.azure.com/api/atlas/v2/relationship/guid/{guid}` |
+
+###### Headers
+| Key | Value |
+| -------------: | :------------- |
+| Authorization | `Bearer YOUR_ACCESS_TOKEN` |
+
+---
+
+### :snake: 7.2 Get a relationship (Python)
+
+```python
+# Set Variables
+ATLAS_ENDPOINT = "https://YOUR_PURVIEW_ACCOUNT.catalog.purview.azure.com"
+ACCESS_TOKEN = "YOUR_ACCESS_TOKEN"
+
+# Prepare Request
+guid = '86e9c889-5fd4-4f44-b086-9fa9e974f9d0'
+url = '{0}/api/atlas/v2/relationship/guid/{1}'.format(ATLAS_ENDPOINT, guid)
+headers = {'Authorization': 'Bearer {0}'.format(ACCESS_TOKEN)}
+
+# Get Entity
+request = requests.get(url, headers=headers)
+response = request.json()
+print(json.dumps(response, indent=4))
+```
+
+---
+
+
+### :gear: 8.1 Create a relationship (custom lineage)
+
+###### Request
+| Property | Value |
+| -------------: | :------------- |
+| Method | POST |
+| Endpoint | `https://YOUR_PURVIEW_ACCOUNT.catalog.purview.azure.com/api/atlas/v2/relationship` |
+
+###### Headers
+| Key | Value |
+| -------------: | :------------- |
+| Authorization | `Bearer YOUR_ACCESS_TOKEN` |
+| Content-Type | application/json |
+
+---
+
+###### Body (Example Payload)
+
+```json
+{
+    "typeName":"process_dataset_outputs",
+    "end1":{
+        "guid":"8cf4916b-a0a6-4c21-9efe-1e6c43fe886c",
+        "typeName":"adf_copy_activity",
+        "uniqueAttributes":{
+        "qualifiedName":"/subscriptions/2c334b6c-e5...."
+        }
+    },
+    "end2":{
+        "guid":"7ccc6d67-7a15-42a6-8fd8-39f6f6f60000",
+        "typeName":"azure_sql_table",
+        "uniqueAttributes":{
+        "qualifiedName":"mssql://sqlsvr8951.database.windows.net/sqldb8951/Taygan/TwitterOne"
+        }
+    }
+}
+```
+
+---
+
+### :snake: 8.2 Create a relationship (custom lineage)
+
+```python
+# Set Variables
+ATLAS_ENDPOINT = "https://YOUR_PURVIEW_ACCOUNT.catalog.purview.azure.com"
+ACCESS_TOKEN = "YOUR_ACCESS_TOKEN"
+
+# Prepare Request
+url = '{0}/api/atlas/v2/relationship'.format(ATLAS_ENDPOINT)
+headers = {
+    'Authorization': 'Bearer {0}'.format(ACCESS_TOKEN),
+    'Content-Type': 'application/json'
+}
+data = {
+    "typeName":"process_dataset_outputs",
+    "end1":{
+        "guid":"8cf4916b-a0a6-4c21-9efe-1e6c43fe886c",
+        "typeName":"adf_copy_activity",
+        "uniqueAttributes":{
+        "qualifiedName":"/subscriptions/2c334b6c-e5...."
+        }
+    },
+    "end2":{
+        "guid":"7ccc6d67-7a15-42a6-8fd8-39f6f6f60000",
+        "typeName":"azure_sql_table",
+        "uniqueAttributes":{
+        "qualifiedName":"mssql://sqlsvr8951.database.windows.net/sqldb8951/Taygan/TwitterOne"
+        }
+    }
+}
+
+# Create Type
+request = requests.post(url, headers=headers, json=data)
+response = request.json()
+print(json.dumps(response, indent=4))
+```
+
+---
+
+### :gear: 9.1 Delete a relationship
+
+###### Request
+| Property | Value |
+| -------------: | :------------- |
+| Method | DELETE |
+| Endpoint | `https://YOUR_PURVIEW_ACCOUNT.catalog.purview.azure.com/api/atlas/v2/relationship/guid/{guid}` |
+
+###### Headers
+| Key | Value |
+| -------------: | :------------- |
+| Authorization | `Bearer YOUR_ACCESS_TOKEN` |
+
+---
+
+### :snake: 9.2 Delete a relationship (Python)
+
+```python
+# Set Variables
+ATLAS_ENDPOINT = "https://YOUR_PURVIEW_ACCOUNT.catalog.purview.azure.com"
+ACCESS_TOKEN = "YOUR_ACCESS_TOKEN"
+
+# Prepare Request
+guid = 'dab534c8-ace7-49be-95a1-def4e394c74a'
+url = '{0}/api/atlas/v2/relationship/guid/{1}'.format(ATLAS_ENDPOINT, guid)
+headers = {'Authorization': 'Bearer {0}'.format(ACCESS_TOKEN)}
+
+# Delete Type
+request = requests.delete(url, headers=headers)
+print(request.status_code)
+```
