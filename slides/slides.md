@@ -32,12 +32,12 @@ marp: true
 
 ### :clock1: Apache Atlas Milestones
 
-* 2015-01-28 [Hortonworks Establishes Data Governance Initiative](https://www.prnewswire.com/news-releases/hortonworks-establishes-data-governance-initiative-300026958.html)
-* 2015-05-06 [Apache Atlas submitted to the Apache Software Foundation](https://incubator.apache.org/projects/atlas.html)
-* 2017-06-21 [Apache Atlas graduates to a Top-Level Project](https://incubator.apache.org/projects/atlas.html)
-* 2018-06-02 [Apache Atlas 1.0.0](https://atlas.apache.org/1.0.0/Downloads.html)
-* 2019-05-04 [Apache Atlas 2.0.0](https://atlas.apache.org/2.0.0/Downloads.html)
-* 2020-07-15 [Apache Atlas 2.1.0](https://atlas.apache.org/#/Downloads) *(Latest)*
+- 2015-01-28 [Hortonworks Establishes Data Governance Initiative](https://www.prnewswire.com/news-releases/hortonworks-establishes-data-governance-initiative-300026958.html)
+- 2015-05-06 [Apache Atlas submitted to the Apache Software Foundation](https://incubator.apache.org/projects/atlas.html)
+- 2017-06-21 [Apache Atlas graduates to a Top-Level Project](https://incubator.apache.org/projects/atlas.html)
+- 2018-06-02 [Apache Atlas 1.0.0](https://atlas.apache.org/1.0.0/Downloads.html)
+- 2019-05-04 [Apache Atlas 2.0.0](https://atlas.apache.org/2.0.0/Downloads.html)
+- 2020-07-15 [Apache Atlas 2.1.0](https://atlas.apache.org/#/Downloads) *(Latest)*
 
 ---
 
@@ -133,9 +133,9 @@ img[alt~="center"] {
 
 ### :thinking: Prerequisites
 
-* An existing **Azure Purview** account.
-* You will need sufficient permissions to **register** an application (i.e. service principal) within your Azure AD tenant.
-* You will need sufficient permissions to assign the application a **role** (e.g. `Purview Data Curator`) in order for Azure Purview to trust your new service principal.
+- An existing **Azure Purview** account.
+- You will need sufficient permissions to **register** an application (i.e. service principal) within your Azure AD tenant.
+- You will need sufficient permissions to assign the application a **role** (e.g. `Purview Data Curator`) in order for Azure Purview to trust your new service principal.
 
 ---
 
@@ -149,9 +149,10 @@ img[alt~="center"] {
 3. Select **New registration**.
 4. Populate the **Register an application** form.  
 
-    * Name (e.g. `purviewapi`)
-    * Supported account types (e.g. `Single tenant`)
-    * Redirect URI (*this can be left blank*)
+    - Name (e.g. `purviewapi`)
+    - Supported account types (e.g. `Single tenant`)
+    - Redirect URI (*this can be left blank*)
+
 5. Click **Register**.
 
 ---
@@ -196,5 +197,47 @@ In order to use the service principal, we need generate a password (aka client s
 5. For **Assign access to**, leave the default `User, group, or service principal`.
 6. For **Select**, enter the name of the service principal (e.g. `purviewapi`) and then click on the name in the results pane.
 7. Click **Save**.
+
+---
+
+### :unlock: Request an Access Token
+
+###### Request
+| Property | Value |
+| -------------: | :------------- |
+| Method | POST |
+| Endpoint | `https://login.microsoftonline.com/YOUR_TENANT_ID/oauth2/token` |
+| Body Type | x-form-urlencoded |
+
+###### Body (x-form-urlencoded)
+| Key | Value |
+| -------------: | :------------- |
+| grant_type | POST |
+| client_id | `YOUR_CLIENT_ID` |
+| client_secret | `YOUR_CLIENT_SECRET` |
+| resource | https://purview.azure.net |
+
+<style scoped>
+table {
+    font-size: 16px;    
+},
+table th {
+    background-color: black;
+    color: white;
+}
+table td {
+    background-color: white;
+}
+table td:nth-child(1) {
+    font-weight: bold;
+    background-color: #DCDCDC;
+}
+</style>
+
+---
+
+### :unlock: Request an Access Token (Postman)
+
+![width:750px center](../image/postman_access_token.png)
 
 ---
