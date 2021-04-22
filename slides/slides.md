@@ -141,7 +141,6 @@ img[alt~="center"] {
 
 <!-- _footer: "https://docs.microsoft.com/en-us/azure/purview/tutorial-using-rest-apis#prerequisites" -->
 
-
 ### :thinking: Prerequisites
 
 - An existing **Azure Purview** account.
@@ -151,7 +150,6 @@ img[alt~="center"] {
 ---
 
 <!-- _footer: "https://docs.microsoft.com/en-us/azure/purview/tutorial-using-rest-apis#create-a-service-principal-application" -->
-
 
 ### :globe_with_meridians: Create a Service Principal
 
@@ -176,7 +174,6 @@ img[alt~="center"] {
 
 <!-- _footer: "https://docs.microsoft.com/en-us/azure/purview/tutorial-using-rest-apis#create-a-service-principal-application" -->
 
-
 ### :key: Create a Client Secret
 
 In order to use the service principal, we need generate a password (aka client secret).
@@ -197,7 +194,6 @@ In order to use the service principal, we need generate a password (aka client s
 ---
 
 <!-- _footer: "https://docs.microsoft.com/en-us/azure/purview/tutorial-using-rest-apis#create-a-service-principal-application" -->
-
 
 ### :lock: Configure Azure Purview to Trust the Service Principal
 
@@ -701,3 +697,9 @@ headers = {'Authorization': 'Bearer {0}'.format(ACCESS_TOKEN)}
 request = requests.delete(url, headers=headers)
 print(request.status_code)
 ```
+
+---
+
+<!-- _footer: "https://aka.ms/purviewapi" -->
+
+# Thank You :wave:
