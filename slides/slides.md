@@ -8,6 +8,17 @@ marp: true
 
 ---
 
+## :loudspeaker: Resources
+
+- Blog Post (https://taygan.co)
+- Data Governance with Azure Purview (https://aka.ms/purview/L100)
+- Azure Purview Lab Exercises (https://aka.ms/purviewlab)
+- Azure Purview Best Practices (https://aka.ms/purview/bb)
+- Azure Purview CLI (https://aka.ms/purviewcli)
+- Azure Purview API (https://aka.ms/purviewapi)
+
+---
+
 ## :helicopter: High-Level Overview
 
 ---
