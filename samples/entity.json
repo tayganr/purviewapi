@@ -1,0 +1,11 @@
+{
+    "entity": {
+        "typeName": "azure_datalake_gen2_path",
+        "attributes": {
+            "qualifiedName": "https://pvdemofm2ieadls.dfs.core.windows.net/bing/data/custom_entity.parquet",
+            "description": "This is a long description for a custom entity.",
+            "path": "/bing/data/custom_entity.parquet",
+            "name": "custom_entity.parquet"
+        }
+    }
+}

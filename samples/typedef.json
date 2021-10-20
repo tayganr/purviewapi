@@ -1,0 +1,94 @@
+{
+    "enumDefs": [],
+    "structDefs": [],
+    "classificationDefs": [],
+    "entityDefs": [{
+        "category": "ENTITY",
+        "name": "custom_sql_table",
+        "description": "custom_sql_table",
+        "serviceType": "Custom SQL Database",
+        "attributeDefs": [
+            {
+                "name": "vendorSpecificId",
+                "typeName": "int",
+                "isOptional": true,
+                "cardinality": "SINGLE",
+                "valuesMinCount": 0,
+                "valuesMaxCount": 1,
+                "isUnique": false,
+                "isIndexable": false,
+                "includeInNotification": false
+            },
+            {
+                "name": "vendorSpecificType",
+                "typeName": "string",
+                "isOptional": true,
+                "cardinality": "SINGLE",
+                "valuesMinCount": 0,
+                "valuesMaxCount": 1,
+                "isUnique": false,
+                "isIndexable": false,
+                "includeInNotification": false
+            }
+        ],
+        "superTypes": [
+            "DataSet"
+        ],
+        "subTypes": [],
+        "relationshipAttributeDefs": [
+            {
+                "name": "inputToProcesses",
+                "typeName": "array<Process>",
+                "isOptional": true,
+                "cardinality": "SET",
+                "valuesMinCount": -1,
+                "valuesMaxCount": -1,
+                "isUnique": false,
+                "isIndexable": false,
+                "includeInNotification": false,
+                "relationshipTypeName": "dataset_process_inputs",
+                "isLegacyAttribute": false
+            },
+            {
+                "name": "meanings",
+                "typeName": "array<AtlasGlossaryTerm>",
+                "isOptional": true,
+                "cardinality": "SET",
+                "valuesMinCount": -1,
+                "valuesMaxCount": -1,
+                "isUnique": false,
+                "isIndexable": false,
+                "includeInNotification": false,
+                "relationshipTypeName": "AtlasGlossarySemanticAssignment",
+                "isLegacyAttribute": false
+            },
+            {
+                "name": "outputFromProcesses",
+                "typeName": "array<Process>",
+                "isOptional": true,
+                "cardinality": "SET",
+                "valuesMinCount": -1,
+                "valuesMaxCount": -1,
+                "isUnique": false,
+                "isIndexable": false,
+                "includeInNotification": false,
+                "relationshipTypeName": "process_dataset_outputs",
+                "isLegacyAttribute": false
+            },
+            {
+                "name": "tabular_schema",
+                "typeName": "tabular_schema",
+                "isOptional": true,
+                "cardinality": "SINGLE",
+                "valuesMinCount": -1,
+                "valuesMaxCount": -1,
+                "isUnique": false,
+                "isIndexable": false,
+                "includeInNotification": false,
+                "relationshipTypeName": "tabular_schema_datasets",
+                "isLegacyAttribute": false
+            }
+        ]
+    }],
+    "relationshipDefs": []
+}

@@ -1,0 +1,17 @@
+{
+    "typeName": "process_dataset_outputs",
+    "end1": {
+        "guid": "8050c208-88a7-4521-b64f-2b1b82e12d70",
+        "typeName": "adf_copy_operation",
+        "uniqueAttributes": {
+            "qualifiedName": "/subscriptions/2c334b6c-e556-40ac-a4c0-c0d1d2e08ca0/resourceGroups/pvdemo-rg-fm2ie/providers/Microsoft.DataFactory/factories/pvdemofm2ie-adf/pipelines/copyPipeline/activities/Copy_a9c#https://pvdemofm2ieadls.dfs.core.windows.net/bing/data/merged.parquet#azure_datalake_gen2_path"
+        }
+    },
+    "end2": {
+        "guid": "36b57593-3aee-4775-b120-0fe6437e05fa",
+        "typeName": "azure_datalake_gen2_path",
+        "uniqueAttributes": {
+            "qualifiedName": "https://pvdemofm2ieadls.dfs.core.windows.net/bing/README.md"
+        }
+    }
+}
